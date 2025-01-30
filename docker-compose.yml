@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  eurekaserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - app-network
+    environment:
+      - JAVA_OPTS=-Xms512m -Xmx512m
+      - EUREKA_INSTANCE_HOSTNAME=eurekaserver
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+      - EUREKA_CLIENT_FETCH_REGISTRY=false
+
+networks:
+  app-network:
+    driver: bridge
